@@ -1,0 +1,2 @@
+# KivyDaichamameUtils
+Kivyを使用したモジュールの集まりの予定
