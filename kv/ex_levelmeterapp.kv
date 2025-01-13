@@ -1,0 +1,113 @@
+#:kivy 2.3.0
+# レベルメーターサンプルレイアウト
+Ex_LevelMeter:
+#-----------------------------------------------------------------------
+# Label用バックグラウンドカラー定義
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+#-----------------------------------------------------------------------
+# ヘッダレイアウト
+<UpperButton@Button>:# ボタンレイアウト
+    font_size:14
+    background_color: .34, .45, .29, 1
+<ColorLabel@Label+BackgroundColor>:# ラベルレイアウト
+    background_color: .4,.4,.2, 1
+    font_size:14
+<Ex_LevelMeter>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        GridLayout:
+            cols:1
+            rows:2
+            #-----------------------------------------------------------------------
+            # ヘッダ
+            GridLayout:
+                cols:2
+                rows:1
+                size_hint_y:0.15
+                UpperButton:
+                    size_hint_x:0.75
+                    text: "レベルメーター"
+                UpperButton:
+                    size_hint_x:0.25
+                    text: "閉じる"
+                    on_press: root.exit_dialog()
+            #-----------------------------------------------------------------------
+            # 情報エリア
+            GridLayout:
+                cols:2
+                rows:1
+                size_hint_y:0.85
+                GridLayout:
+                    size_hint_x:0.2
+                    cols:1
+                    rows:3
+                    ColorLabel:
+                        size_hint_y:0.1
+                        text:'CPU'
+                    ColorLabel:
+                        size_hint_y:0.1
+                        id:cpu_info
+                    LevelMeterV:
+                        id:cpu_info_meter
+                        size_hint_y:0.6
+                GridLayout:
+                    size_hint_x:0.8
+                    cols:1
+                    rows:7
+                    MultiLevelMeterV:
+                        id:multilevelmeter
+                        size_hint_y:0.3
+                        min:0
+                    ColorLabel:
+                        size_hint_y:0.1
+                        id:mem_info
+                        text:'メモリ使用率(%)'
+                    LevelMeterH:
+                        id:mem_info_meter
+                        size_hint_y:0.1
+                    ColorLabel:
+                        size_hint_y:0.1
+                        id:disk_info
+                        text:'ディスク使用率(%)'
+                    LevelMeterH:
+                        id:disk_info_meter
+                        size_hint_y:0.1
+                    ColorLabel:
+                        size_hint_y:0.1
+                        id:interval_info
+                        text:'更新間隔:1'
+                    Slider:
+                        id:slider_interval
+                        min:1
+                        max:5
+                        step:1
+                        value:5
+                        size_hint_y:0.2
+
+
+#-----------------------------------------------------------------------
+# 終了確認ダイアログ
+<PopupExitDialog>:
+    title: '確認'
+    size_hint: 0.6, 0.8 
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            font_size:14
+            text: '選択してください'
+        Button:
+            font_size:14
+            text: 'プログラム終了'
+            on_release: root.exec_exit()
+        Button:
+            font_size:14
+            text: 'キャンセル'
+            on_press: root.dismiss()
