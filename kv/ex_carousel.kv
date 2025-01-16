@@ -1,0 +1,103 @@
+#:kivy 2.3.0
+Ex_Carousel:
+<Ex_Carousel>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        GridLayout:
+            cols:1
+            rows:2
+            #-----------------------------------------------------------------------
+            # ヘッダ
+            GridLayout:
+                size_hint_y:0.1
+                cols:2
+                rows:1
+                Button:
+                    size_hint_x:0.75
+                    id:id_year_month
+                    on_press: root.initial_screen()
+                Button:
+                    size_hint_x:0.25
+                    text: "閉じる"
+                    on_press: root.exit_dialog()
+            #-----------------------------------------------------------------------
+            # メイン
+            Carousel:
+                size_hint_y:0.8
+                id:id_carousel
+                # カレンダー
+                GridLayout:
+                    rows: 3 
+                    ButtonPanel:
+                        size_hint_y:0.1
+                        id:id_calendar_head
+                    ButtonPanel:
+                        size_hint_y:0.8
+                        id:id_calendar
+                    GridLayout:
+                        size_hint_y:0.1
+                        cols:4
+                        rows:1
+                        Button:
+                            text:"<"
+                            on_release:
+                                root.menu_sw("prev")
+                        Button:
+                            text:">"
+                            on_release:
+                                root.menu_sw("next")
+                        Button:
+                            text:"-"
+                            on_release:
+                                root.menu_sw("down")
+                        Button:
+                            text:"+"
+                            on_release:
+                                root.menu_sw("up")
+                # スケジュールリスト
+                GridLayout:
+                    rows:3
+                    Label:
+                        id:id_day_label
+                        size_hint_y:0.1
+                        text:"日の予定"
+                    ButtonPanel:
+                        size_hint_y:0.9
+                        id:id_schedule
+                    Button:
+                        size_hint_y:0.1
+                        text: "戻る"
+                        on_release:
+                            root.back_to_calendar()
+                # 入力
+                GridLayout:
+                    rows:3
+                    Label:
+                        size_hint_y:0.1
+                        text:"予定を編集"
+                    TextInput:
+                        id:id_textinput
+                    Button:
+                        size_hint_y:0.1
+                        text: "戻る"
+                        on_release:
+                            root.back_to_schedule()
+
+
+
+#-----------------------------------------------------------------------
+# 終了確認ダイアログ
+<PopupExitDialog>:
+    title: 'プログラムを終了しますか？'
+    size_hint: 0.6, 0.2
+    BoxLayout:
+        orientation: 'horizontal'
+        Button:
+            font_size:self.width/14
+            text: '終了します'
+            on_release: root.exec_exit()
+        Button:
+            font_size:self.width/14
+            text: 'キャンセル'
+            on_press: root.dismiss()
