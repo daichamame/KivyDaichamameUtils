@@ -102,14 +102,14 @@ class Ex_Carousel(Widget):
             # 表示されている画面毎に処理するイベントを分岐
             if current == 0:    # 表示されている画面がカレンダーの場合
                 ret = self.ids.id_calendar.touch_up(touch.pos)
-                if(ret != -1):
+                if(ret is not None):
                     val = self.ids.id_calendar.get_text(ret)  
                     if(val != ""):  # 日付を押した場合
                         self.ids.id_carousel.index = 1
                         self.ids.id_day_label.text = val + "日の予定"
             elif current == 1:  # 表示されている画面がスケジュールの場合
                 ret = self.ids.id_schedule.touch_up(touch.pos)
-                if(ret != -1):
+                if(ret is not None):
                     self.select_row = ret
                     self.ids.id_carousel.index = 2
                     self.ids.id_textinput.text = str(ret+1) + "行目を選択しました。"
@@ -118,8 +118,7 @@ class Ex_Carousel(Widget):
         return super(Ex_Carousel, self).on_touch_up(touch)
     # サイズ変更
     def on_resize(self,width,height):
-        Window.size=(self.size)     # ウィンドウサイズ固定する場合に設定
-        # self.display()            # ウィンドウサイズを可変にする場合に設定
+        self.display()            # ウィンドウサイズを可変にする場合に設定
     # 画面の描画
     def display(self):
         current = self.ids.id_carousel.index

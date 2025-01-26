@@ -23,10 +23,12 @@ Kivyで使用するために作成したモジュール
 #### ファイル構成
 
 - kv
-  - ex_buttonpanelapp.kv  縦一列、横一列、縦7横7配列したボタン
-  - ex_carousel.kv        カレンダー表記、リスト表記したサンプル
+  - ex_buttonpanel_image.kv  画像を貼り付けたサンプル
+  - ex_buttonpanelapp.kv     縦一列、横一列、縦7横7配列したボタン
+  - ex_carousel.kv           カレンダー表記、リスト表記したサンプル
 - lib
   - buttonpanel.py        ボタンパネルモジュール
+- ex_buttonpanel_image.py 画像を張り付けたサンプル
 - ex_buttonpanelapp.py    ボタン配列例
 - ex_carousel.py          カレンダーのサンプル
 #### 画面イメージ
@@ -38,3 +40,5 @@ Kivyで使用するために作成したモジュール
 ![ボタンパネル例](img/buttonpanel_3.png)
 
 ![ボタンパネル例](img/buttonpanel_4.png)
+
+![ボタンパネル例](img/buttonpanel_5.png)

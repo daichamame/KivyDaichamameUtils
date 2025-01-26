@@ -1,0 +1,55 @@
+#:kivy 2.3.0
+# ボタンパネルデモのレイアウト
+Ex_ButtonPanel:
+<Ex_ButtonPanel>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        GridLayout:
+            cols:1
+            rows:2
+            #-----------------------------------------------------------------------
+            # ヘッダ
+            GridLayout:
+                size_hint_y:0.1
+                cols:2
+                rows:1
+                Button:
+                    size_hint_x:0.75
+                    text: "ボタンに画像表示"
+                    on_press: root.display()
+                Button:
+                    size_hint_x:0.25
+                    text: "閉じる"
+                    on_press: root.exit_dialog()
+            #-----------------------------------------------------------------------
+            # メイン
+            GridLayout:
+                id:id_maingrid
+                size_hint_y:0.8
+                cols:3
+                rows:1
+                ButtonPanel:
+                    size_hint_x:0.2
+                    id:id_a
+                ButtonPanel:
+                    size_hint_x:0.6
+                    id:id_main
+                ButtonPanel:
+                    size_hint_x:0.2
+                    id:id_b
+#-----------------------------------------------------------------------
+# 終了確認ダイアログ
+<PopupExitDialog>:
+    title: 'プログラムを終了しますか？'
+    size_hint: 0.6, 0.2
+    BoxLayout:
+        orientation: 'horizontal'
+        Button:
+            font_size:self.width/14
+            text: '終了します'
+            on_release: root.exec_exit()
+        Button:
+            font_size:self.width/14
+            text: 'キャンセル'
+            on_press: root.dismiss()
